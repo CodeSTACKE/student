@@ -1,0 +1,1 @@
+Accessing the Api-docs -URL = http://localhost:8080/v3/api-docs 
