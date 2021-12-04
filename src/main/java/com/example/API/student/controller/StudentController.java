@@ -27,4 +27,39 @@ public class StudentController {
         List<Student> studentList = studentRepo.findAll();
         return studentList;
     }
+
+//    get Student with id
+@GetMapping("/{id}")
+@ResponseStatus(HttpStatus.OK)
+public Student getCarById(@PathVariable Integer id){
+    if(id!=null){
+        return studentRepo.getById(id);
+    }
+    else
+        throw new RuntimeException("No student id available");
+
+}
+    //    update
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Student getUpdateById(@RequestBody Student student, @PathVariable Integer id){
+        System.out.println(id);
+        System.out.println(student.getId());
+
+        if(student.getId()==null) {
+            student.setId(id);
+        }
+        if(student.getId()!=id)
+        {
+            throw new IllegalArgumentException("student ID must match parameter given");
+        }
+        return studentRepo.save(student);
+    }
+    //  Delete
+    @DeleteMapping("/{id}")
+    public void deleteCar(@PathVariable int id) {
+        studentRepo.deleteById(id);
+    }
+
+
 }
